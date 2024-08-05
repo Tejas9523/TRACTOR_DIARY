@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "596326077266",
+    "project_id": "tractordiary-405dd",
+    "storage_bucket": "tractordiary-405dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596326077266:android:3208cda543dd870f2b208b",
+        "android_client_info": {
+          "package_name": "com.example.tractordiary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAyJUXzm6gcdHbZOysXszlZW7pzKSESFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
