@@ -84,6 +84,22 @@ public class home extends AppCompatActivity {
                 startActivity(new Intent(home.this,history.class));
         });
 
+        binding.expenses.setOnClickListener(view -> {
+            startActivity(new Intent(home.this, ExpensesActivity.class));
+        });
+
+        binding.analytics.setOnClickListener(view -> {
+            startActivity(new Intent(home.this, AnalyticsActivity.class));
+        });
+
+        binding.customerReports.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    home.this,
+                    CustomerReportsActivity.class
+            );
+            startActivity(intent);
+        });
+
         binding.date.setOnClickListener(view -> {
             final Calendar c = Calendar.getInstance();
 

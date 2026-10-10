@@ -1,31 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".history">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Work History"
+            android:textColor="#212121"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Search and manage your saved work entries"
+            android:textColor="#757575"
+            android:textSize="14sp" />
+
+        <!-- Search -->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/back"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/bg_light_border"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             app:iconifiedByDefault="false"
-            app:queryHint="Search Here ..." />
+            app:queryHint="Search work entries..." />
 
+        <!-- Selection panel -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:background="@drawable/bg_light_border">
+
+            <!-- Delete icon -->
+            <ImageButton
+                android:id="@+id/deleteSelected"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_delete_icon"
+                android:src="@drawable/ic_delete"
+                android:contentDescription="Delete selected entries"
+                android:padding="11dp"
+                android:scaleType="centerInside"
+                android:clickable="true"
+                android:focusable="true"
+                app:tint="#B3261E" />
+
+            <!-- Select All -->
+            <CheckBox
+                android:id="@+id/selectAll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="#FFC801"
+                android:text="Select All"
+                android:textColor="#212121"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!-- Selected count -->
+            <TextView
+                android:id="@+id/selectedCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="#FFF5CC"
+                android:text="0 selected"
+                android:textColor="#5C4A00"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- History list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/his"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/row" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

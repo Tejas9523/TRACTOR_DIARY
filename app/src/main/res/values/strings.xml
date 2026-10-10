@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TractorDiary</string>
+
+    <string-array name="expense_categories">
+        <item>Diesel</item>
+        <item>Maintenance</item>
+    </string-array>
+
 </resources>
