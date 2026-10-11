@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -651,15 +652,6 @@ public class ExpensesActivity extends AppCompatActivity {
 
         binding.deleteSelectedExpenses.setEnabled(
                 selectedCount > 0 && !deletingExpenses);
-
-        if (deletingExpenses) {
-            binding.deleteSelectedExpenses.setText("Deleting...");
-        } else if (selectedCount > 0) {
-            binding.deleteSelectedExpenses.setText(
-                    "Delete Selected (" + selectedCount + ")");
-        } else {
-            binding.deleteSelectedExpenses.setText("Delete Selected");
-        }
 
         updatingSelectionControls = false;
     }

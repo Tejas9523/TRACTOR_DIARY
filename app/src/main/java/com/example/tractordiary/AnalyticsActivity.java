@@ -256,54 +256,76 @@ public class AnalyticsActivity extends AppCompatActivity {
             labels.add(shortMonths[month]);
         }
 
-        BarDataSet revenueSet =
-                new BarDataSet(revenueEntries, "Revenue");
-        BarDataSet expenseSet =
-                new BarDataSet(expenseEntries, "Expenses");
+        BarDataSet revenueSet = new BarDataSet(revenueEntries, "Revenue");
+        BarDataSet expenseSet = new BarDataSet(expenseEntries, "Expenses");
 
-        revenueSet.setColor(
-                androidx.core.content.ContextCompat.getColor(
-                        this, R.color.yellow));
-        expenseSet.setColor(0xFFFB9B26);
+        // Keep the app's yellow theme and use charcoal for contrast.
+        int yellow = androidx.core.content.ContextCompat.getColor(
+                this, R.color.yellow);
+        int charcoal = 0xFF424242;
 
-        revenueSet.setValueTextColor(0xFF212121);
-        expenseSet.setValueTextColor(0xFF212121);
-        revenueSet.setValueTextSize(9f);
-        expenseSet.setValueTextSize(9f);
+        revenueSet.setColor(yellow);
+        expenseSet.setColor(charcoal);
+
+        // Avoid crowded currency labels on the bars.
+        revenueSet.setDrawValues(false);
+        expenseSet.setDrawValues(false);
 
         BarData barData = new BarData(revenueSet, expenseSet);
         barData.setBarWidth(0.36f);
 
         BarChart chart = binding.revenueExpenseChart;
         chart.setData(barData);
-        chart.getDescription().setEnabled(false);
+        chart.setBackgroundColor(android.graphics.Color.WHITE);
+        chart.setDrawGridBackground(false);
+        chart.setDrawBarShadow(false);
+        chart.setHighlightFullBarEnabled(false);
+        chart.setDoubleTapToZoomEnabled(false);
+        chart.setPinchZoom(false);
+        chart.setScaleEnabled(false);
+        chart.setFitBars(false);
+        chart.setExtraBottomOffset(8f);
+        chart.setExtraTopOffset(12f);
         chart.setNoDataText("No records for the selected filters");
         chart.setNoDataTextColor(0xFF757575);
-        chart.setDrawGridBackground(false);
-        chart.setFitBars(true);
+        chart.getDescription().setEnabled(false);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
         xAxis.setCenterAxisLabels(true);
-        xAxis.setTextColor(0xFF757575);
+        xAxis.setTextColor(0xFF616161);
+        xAxis.setTextSize(11f);
         xAxis.setDrawGridLines(false);
-        xAxis.setAxisMinimum(0f);
-        xAxis.setAxisMaximum((float) labels.size());
+        xAxis.setAxisLineColor(0xFFE0E0E0);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setAvoidFirstLastClipping(true);
 
         chart.getAxisLeft().setAxisMinimum(0f);
         chart.getAxisLeft().setTextColor(0xFF757575);
-        chart.getAxisLeft().setGridColor(0xFFE5E5E5);
+        chart.getAxisLeft().setTextSize(10f);
+        chart.getAxisLeft().setGridColor(0xFFEEEEEE);
+        chart.getAxisLeft().setDrawAxisLine(false);
+        chart.getAxisLeft().setGranularityEnabled(true);
         chart.getAxisRight().setEnabled(false);
 
+        chart.getLegend().setEnabled(true);
         chart.getLegend().setTextColor(0xFF424242);
         chart.getLegend().setTextSize(12f);
+        chart.getLegend().setForm(
+                com.github.mikephil.charting.components.Legend.LegendForm.SQUARE);
+        chart.getLegend().setXEntrySpace(16f);
+        chart.getLegend().setWordWrapEnabled(true);
 
         if (!labels.isEmpty()) {
+            // Each month occupies one group containing Revenue and Expenses.
+            chart.getXAxis().setAxisMinimum(0f);
+            chart.getXAxis().setAxisMaximum((float) labels.size());
             chart.groupBars(0f, 0.16f, 0.06f);
         }
 
+        chart.animateY(450);
         chart.invalidate();
     }
 
@@ -563,9 +585,8 @@ public class AnalyticsActivity extends AppCompatActivity {
         binding.cashAfterExpenses.setText(money(cashAfterExpenses));
         binding.outstandingPayments.setText(money(totals.pending));
 
-        binding.dieselTotal.setText("Diesel: " + money(totals.diesel));
-        binding.maintenanceTotal.setText(
-                "Maintenance: " + money(totals.maintenance));
+        binding.dieselTotal.setText(money(totals.diesel));
+        binding.maintenanceTotal.setText(money(totals.maintenance));
 
         String month = binding.monthFilter.getSelectedItem().toString();
         String year = binding.yearFilter.getSelectedItem().toString();
@@ -597,3 +618,4 @@ public class AnalyticsActivity extends AppCompatActivity {
         super.onDestroy();
     }
 }
+
